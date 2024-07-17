@@ -10,3 +10,7 @@ build:
 manifests:
   rawYaml:
     - k8s/web.yaml
+test:
+- image: skaffold-buildpacks-node
+  custom:
+    - command: echo This is a custom test commmand!
