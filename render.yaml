@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web
+spec:
+  ports:
+    - name: http
+      port: 3000
+  selector:
+    app: web
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+spec:
+  selector:
+    matchLabels:
+      app: web
+  template:
+    metadata:
+      labels:
+        app: web
+    spec:
+      containers:
+        - image: skaffold-buildpacks-node:66010186d3b6982f86901a185f983f4ed0314d0254e51c1877f220b051fb4877
+          name: web
+          ports:
+            - containerPort: 3000
